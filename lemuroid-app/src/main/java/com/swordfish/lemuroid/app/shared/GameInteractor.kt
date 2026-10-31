@@ -84,7 +84,10 @@ class GameInteractor(
      * the local file URI in the database. This ensures the cover survives
      * app restarts regardless of where the user picked the file from.
      */
-    fun onSetCustomCoverUri(game: Game, sourceUri: String) {
+    fun onSetCustomCoverUri(
+        game: Game,
+        sourceUri: String,
+    ) {
         GlobalScope.launch {
             val localUri =
                 customCoverManager.importCover(
@@ -121,7 +124,9 @@ class GameInteractor(
             return true
         }
 
-        activity.activity().displayToast(R.string.game_interactor_notification_permission_required)
+        activity.activity().displayToast(
+            R.string.game_interactor_notification_permission_required,
+        )
         return false
     }
 

@@ -1,3 +1,4 @@
+
 package com.swordfish.lemuroid.app.mobile.feature.gamemenu
 
 import androidx.compose.animation.AnimatedContentScope
@@ -45,10 +46,10 @@ enum class GameMenuRoute(
         parent = HOME,
     ),
     CHEATS(
-    route = "cheats",
-    titleId = R.string.game_menu_title,
-    parent = HOME,
-    ),
+        route = "cheats",
+        titleId = R.string.game_menu_title,
+        parent = HOME,
+    );
 
     fun canGoBack(): Boolean {
         return parent != null

@@ -1,3 +1,4 @@
+
 package com.swordfish.lemuroid.app.shared.game
 
 import android.app.Activity
@@ -14,6 +15,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import com.swordfish.lemuroid.app.mobile.feature.game.GameActivity
 import com.swordfish.lemuroid.app.mobile.feature.game.GameService
+import com.swordfish.lemuroid.app.mobile.feature.gamemenu.GameCheatStorage
 import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsManager
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.AppTheme
 import com.swordfish.lemuroid.app.shared.GameMenuContract
@@ -39,6 +41,7 @@ import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.saves.SavesManager
 import com.swordfish.lemuroid.lib.saves.StatesManager
 import com.swordfish.lemuroid.lib.saves.StatesPreviewManager
+import com.swordfish.libretrodroid.LibretroDroid
 import com.swordfish.touchinput.radial.sensors.TiltConfiguration
 import dagger.Lazy
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -357,6 +360,22 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         super.onDestroy()
     }
 
+    private fun applySavedCheats() {
+        val retroView = baseGameScreenViewModel.retroGameView.retroGameView ?: return
+
+        val cheats = GameCheatStorage(applicationContext).load(game.id.toString())
+
+        retroView.queueEvent {
+            LibretroDroid.resetCheat()
+        }
+
+        cheats.forEachIndexed { index, cheat ->
+            retroView.setCheat(index, cheat.enabled, cheat.code)
+        }
+
+        Timber.i("Applied ${cheats.count { it.enabled }} enabled cheats for game ${game.id}")
+    }
+
     override fun onActivityResult(
         requestCode: Int,
         resultCode: Int,
@@ -413,6 +432,8 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                 val tiltConfig = data.serializable<TiltConfiguration>(GameMenuContract.RESULT_CHANGE_TILT_CONFIG)
                 baseGameScreenViewModel.changeTiltConfiguration(tiltConfig!!)
             }
+
+            applySavedCheats()
         }
     }
 

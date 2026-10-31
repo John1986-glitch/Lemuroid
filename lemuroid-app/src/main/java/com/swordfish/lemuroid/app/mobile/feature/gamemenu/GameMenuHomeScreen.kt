@@ -1,3 +1,4 @@
+
 package com.swordfish.lemuroid.app.mobile.feature.gamemenu
 
 import android.content.Intent
@@ -53,6 +54,19 @@ fun GameMenuHomeScreen(
                 onClick = { navController.navigateToRoute(GameMenuRoute.LOAD) },
             )
         }
+
+        LemuroidSettingsMenuLink(
+            title = { Text(text = "Cheats") },
+            icon = {
+                Icon(
+                    painterResource(R.drawable.ic_menu_settings),
+                    contentDescription = "Cheats",
+                )
+            },
+            onClick = {
+                navController.navigateToRoute(GameMenuRoute.CHEATS)
+            },
+        )
 
         LemuroidSettingsMenuLink(
             title = { Text(text = stringResource(id = R.string.game_menu_quit)) },

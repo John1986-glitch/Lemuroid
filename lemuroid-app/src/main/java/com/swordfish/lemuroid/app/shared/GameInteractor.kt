@@ -1,3 +1,4 @@
+
 package com.swordfish.lemuroid.app.shared
 
 import android.Manifest
@@ -63,7 +64,10 @@ class GameInteractor(
         return shortcutsGenerator.supportShortcuts()
     }
 
-    fun onSetCustomName(game: Game, customName: String) {
+    fun onSetCustomName(
+        game: Game,
+        customName: String,
+    ) {
         GlobalScope.launch {
             retrogradeDb.gameDao().update(game.copy(customName = customName))
         }
@@ -77,12 +81,16 @@ class GameInteractor(
 
     /**
      * Copies the image at [sourceUri] into app-private storage, then stores
-     * the local file URI in the database.  This ensures the cover survives
+     * the local file URI in the database. This ensures the cover survives
      * app restarts regardless of where the user picked the file from.
      */
     fun onSetCustomCoverUri(game: Game, sourceUri: String) {
         GlobalScope.launch {
-            val localUri = customCoverManager.importCover(game.id, Uri.parse(sourceUri))
+            val localUri =
+                customCoverManager.importCover(
+                    game.id,
+                    Uri.parse(sourceUri),
+                )
             retrogradeDb.gameDao().update(game.copy(customCoverUri = localUri))
         }
     }

@@ -110,7 +110,7 @@ fun GameMenuCheatsScreen(
 
                         TextButton(
                             onClick = {
-                                viewModel.removeCheat(index)
+                                viewModel.deleteCheat(index)
                             },
                         ) {
                             Text("Delete")

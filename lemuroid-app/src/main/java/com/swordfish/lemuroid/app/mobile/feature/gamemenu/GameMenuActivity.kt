@@ -225,6 +225,16 @@ class GameMenuActivity : RetrogradeComponentActivity() {
                             ),
                             gameMenuRequest,
                         )
+                                 composable(GameMenuRoute.CHEATS) {
+            GameMenuCheatsScreen(
+                viewModel(
+                    factory = GameMenuCheatsViewModel.Factory(
+                        application,
+                        gameMenuRequest.game.id.toString(),
+                    ),
+                ),
+            )
+                                 }
                     }
                 }
             }

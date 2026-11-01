@@ -1,3 +1,4 @@
+
 @file:Suppress("UNUSED", "INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 
 package com.swordfish.lemuroid.app.mobile.feature.gamemenu
@@ -225,16 +226,17 @@ class GameMenuActivity : RetrogradeComponentActivity() {
                             ),
                             gameMenuRequest,
                         )
-                                 composable(GameMenuRoute.CHEATS) {
-            GameMenuCheatsScreen(
-                viewModel(
-                    factory = GameMenuCheatsViewModel.Factory(
-                        application,
-                        gameMenuRequest.game.id.toString(),
-                    ),
-                ),
-            )
-                                 }
+                    }
+                    composable(GameMenuRoute.CHEATS) {
+                        GameMenuCheatsScreen(
+                            viewModel(
+                                factory =
+                                    GameMenuCheatsViewModel.Factory(
+                                        application,
+                                        gameMenuRequest.game.id.toString(),
+                                    ),
+                            ),
+                        )
                     }
                 }
             }

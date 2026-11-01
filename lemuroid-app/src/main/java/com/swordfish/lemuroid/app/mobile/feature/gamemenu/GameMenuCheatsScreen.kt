@@ -60,7 +60,10 @@ fun GameMenuCheatsScreen(viewModel: GameMenuCheatsViewModel) {
 
         Button(
             onClick = {
-                viewModel.addCheat(cheatName, cheatCode)
+                viewModel.addCheat(
+                    cheatName,
+                    cheatCode,
+                )
                 cheatName = ""
                 cheatCode = ""
             },

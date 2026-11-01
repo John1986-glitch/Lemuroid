@@ -1,1 +1,29 @@
+name: Build Debug APK
 
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: temurin
+          cache: gradle
+
+      - run: chmod +x gradlew
+
+      - run: ./gradlew :lemuroid-app:assembleFreeBundleDebug
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lemuroid-debug-apk
+          path: lemuroid-app/build/outputs/apk/**/*.apk

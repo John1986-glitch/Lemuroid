@@ -1,4 +1,3 @@
-
 package com.swordfish.lemuroid.app.mobile.feature.gamemenu
 
 import android.content.Context
@@ -75,20 +74,12 @@ class GameMenuCheatsViewModel(
         private val context: Context,
         private val gameId: String,
     ) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(
-            modelClass: Class<T>,
-        ): T {
-            if (modelClass.isAssignableFrom(GameMenuCheatsViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return GameMenuCheatsViewModel(
-                    context.applicationContext,
-                    gameId,
-                ) as T
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            require(modelClass.isAssignableFrom(GameMenuCheatsViewModel::class.java)) {
+                "Unknown ViewModel class: ${modelClass.name}"
             }
-
-            throw IllegalArgumentException(
-                "Unknown ViewModel class: ${modelClass.name}",
-            )
+            return GameMenuCheatsViewModel(context.applicationContext, gameId) as T
         }
     }
 }

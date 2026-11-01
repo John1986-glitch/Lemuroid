@@ -67,7 +67,10 @@ fun GameMenuCheatsScreen(viewModel: GameMenuCheatsViewModel) {
                 cheatName = ""
                 cheatCode = ""
             },
-            enabled = cheatName.isNotBlank() && cheatCode.isNotBlank(),
+            enabled = (
+                cheatName.isNotBlank() &&
+                    cheatCode.isNotBlank()
+                ),
             modifier = Modifier.fillMaxWidth(),
         ) {
             Text("Add Cheat")

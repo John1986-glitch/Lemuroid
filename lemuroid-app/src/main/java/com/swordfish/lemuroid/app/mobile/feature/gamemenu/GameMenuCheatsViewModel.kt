@@ -21,7 +21,10 @@ class GameMenuCheatsViewModel(
     val cheats: StateFlow<List<GameCheat>> =
         _cheats.asStateFlow()
 
-    fun addCheat(name: String, code: String) {
+    fun addCheat(
+        name: String,
+        code: String,
+    ) {
         val cleanName = name.trim()
         val cleanCode = code.trim()
 
@@ -30,10 +33,11 @@ class GameMenuCheatsViewModel(
         }
 
         updateCheats(
-            _cheats.value + GameCheat(
-                name = cleanName,
-                code = cleanCode,
-            ),
+            _cheats.value +
+                GameCheat(
+                    name = cleanName,
+                    code = cleanCode,
+                ),
         )
     }
 
@@ -74,11 +78,7 @@ class GameMenuCheatsViewModel(
         override fun <T : ViewModel> create(
             modelClass: Class<T>,
         ): T {
-            if (
-                modelClass.isAssignableFrom(
-                    GameMenuCheatsViewModel::class.java,
-                )
-            ) {
+            if (modelClass.isAssignableFrom(GameMenuCheatsViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return GameMenuCheatsViewModel(
                     context.applicationContext,

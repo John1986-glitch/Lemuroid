@@ -1,4 +1,3 @@
-
 package com.swordfish.lemuroid.app.mobile.feature.gamemenu
 
 import androidx.compose.foundation.layout.Arrangement
@@ -35,10 +34,11 @@ fun GameMenuCheatsScreen(viewModel: GameMenuCheatsViewModel) {
     var cheatCode by remember { mutableStateOf("") }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(16.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Text("Game Cheats")

@@ -5,7 +5,6 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 class GameCheatStorage(context: Context) {
-
     private val preferences =
         context.getSharedPreferences(
             "game_cheats",

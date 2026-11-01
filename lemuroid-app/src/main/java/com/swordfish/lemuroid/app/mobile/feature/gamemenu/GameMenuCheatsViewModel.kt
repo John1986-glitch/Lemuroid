@@ -1,3 +1,4 @@
+
 package com.swordfish.lemuroid.app.mobile.feature.gamemenu
 
 import android.content.Context
@@ -11,7 +12,6 @@ class GameMenuCheatsViewModel(
     context: Context,
     private val gameId: String,
 ) : ViewModel() {
-
     private val storage =
         GameCheatStorage(context.applicationContext)
 
@@ -71,11 +71,14 @@ class GameMenuCheatsViewModel(
         private val context: Context,
         private val gameId: String,
     ) : ViewModelProvider.Factory {
-
         override fun <T : ViewModel> create(
             modelClass: Class<T>,
         ): T {
-            if (modelClass.isAssignableFrom(GameMenuCheatsViewModel::class.java)) {
+            if (
+                modelClass.isAssignableFrom(
+                    GameMenuCheatsViewModel::class.java,
+                )
+            ) {
                 @Suppress("UNCHECKED_CAST")
                 return GameMenuCheatsViewModel(
                     context.applicationContext,

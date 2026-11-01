@@ -28,9 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun GameMenuCheatsScreen(
-    viewModel: GameMenuCheatsViewModel,
-) {
+fun GameMenuCheatsScreen(viewModel: GameMenuCheatsViewModel) {
     val cheats by viewModel.cheats.collectAsState()
 
     var cheatName by remember { mutableStateOf("") }
